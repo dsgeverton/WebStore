@@ -7,7 +7,32 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
    
     <ui:composition template="./Template/template.xhtml">
-   
+        <ui:define name="corpo">
+            <p:layoutUnit position="center">
+                <h:form id="form">
+                    <p:dataGrid var="produtoDestaque" value="#{DestaqueViewBean.produtos}" columns="3" layout="grid"
+                        rows="3" id="dataGridProdutos" >
+
+                        <f:facet name="header">
+                            Produtos em Destaque
+                        </f:facet>
+
+                        <p:panel header="#{produtoDestaque.id}" style="text-align:center">
+                            <h:panelGrid columns="1" style="width:100%">
+                                <p:graphicImage name="demo/images/car/#{car.brand}.gif"/> 
+                                
+                                <h:outputText value="#{produtoDestaque.nome}" />
+
+                                <p:commandLink update=":form:carDetail" oncomplete="PF('carDialog').show()" title="View Detail">
+                                    <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />
+                                    <f:setPropertyActionListener value="#{produtoDestaque}" target="#{DestaqueViewBean.selectedCar}" />
+                                </p:commandLink>
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:dataGrid>
+                </h:form>
+            </p:layoutUnit>
+        </ui:define>
     </ui:composition>
 </html>
 
