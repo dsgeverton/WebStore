@@ -8,7 +8,27 @@
     <ui:composition template="./Template/template.xhtml">
         <ui:define name="corpo">
             <p:layoutUnit position="center">
-                 CONTATO
+                 <h:form >
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="Nome:"/>
+                        <p:inputText id="nome" value="#{contatoBean.nome}"/>
+
+                        <p:outputLabel value="Sobrenome"/>
+                        <p:inputText id="sobrenome" value="#{contatoBean.sobrenome}"/>
+
+                        <p:outputLabel value="Email:"/>
+                        <p:inputText id="email" value="#{contatoBean.email}"/>
+
+                        <p:outputLabel value="Telefone:"/>
+                        <p:inputText id="telefone" value="#{contatoBean.telefone}"/>
+
+                        <p:outputLabel value="Mensagem:"/>
+                        <p:inputTextarea rows="6" cols="33" id="mensagem" value="#{contatoBean.mensagem}"/>
+
+                        <p:commandButton value="Enviar" action="#{contatoBean.enviar()}">
+                                           </p:commandButton>
+                    </p:panelGrid>
+                </h:form>
             </p:layoutUnit>
         </ui:define>
     </ui:composition>

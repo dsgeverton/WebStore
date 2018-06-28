@@ -8,28 +8,29 @@
     <ui:composition template="./Template/template.xhtml">
         <ui:define name="corpo">
             <p:layoutUnit position="center">
-
                 <h:form>
+
+                    <p:growl id="growl" autoUpdate="true" life="5000"/>
                     <p:panelGrid columns="2" style="margin: auto; text-align: center" id="panelCadastro">
 
                         <p:outputLabel value="Codigo Produto:"/>
-                        <p:inputText id="nome" value="#{cadastroBean.produto.id})"/>
+                        <p:inputText id="nome" value="#{cadastroBean.id}"/>
 
                         <p:outputLabel value="Nome:"/>
-                        <p:inputText id="codigo" value="#{cadastroBean.produto.nome}"/>
+                        <p:inputText id="codigo" value="#{cadastroBean.nome}"/>
 
                         <p:outputLabel value="Descrição:"/>
-                        <p:inputTextarea id="descricao" value="#{cadastroBean.produto.descricao}"/>
+                        <p:inputTextarea id="descricao" value="#{cadastroBean.descricao}"/>
 
                         <p:outputLabel value="Valor:"/>
                         <p:inputNumber decimalSeparator="," symbol="R$ " symbolPosition="p" 
-                                       thousandSeparator="." id="valor" value="#{cadastroBean.produto.preco}"/>
+                                       thousandSeparator="." id="valor" value="#{cadastroBean.preco}"/>
 
                         <p:outputLabel value="Quantidade"/>
-                        <p:inputNumber id="quantidade" value="#{cadastroBean.produto.quantidade}"/>
+                        <p:inputNumber id="quantidade" value="#{cadastroBean.quantidade}"/>
 
                         <p:outputLabel value="Tipo:"/>
-                        <p:selectOneMenu id="tipo" value="#{cadastroBean.produto.tipo}" effect="fold" style="width:125px">
+                        <p:selectOneMenu id="tipo" value="#{cadastroBean.tipo}" effect="fold" style="width:125px">
                             <f:selectItem itemLabel="Select One" itemValue="" />
                             <f:selectItem itemLabel="Calçado" itemValue="calcado" />
                             <f:selectItem itemLabel="Calça" itemValue="calca" />
@@ -38,13 +39,13 @@
                         </p:selectOneMenu>
 
                         <p:outputLabel value="Disponível:"/>
-                        <p:selectOneRadio id="disponibilidade" value="#{cadastroBean.produto.disponivel}">
+                        <p:selectOneRadio id="disponibilidade" value="#{cadastroBean.disponivel}">
                             <f:selectItem itemLabel="Sim" itemValue="true" />
                             <f:selectItem itemLabel="Não" itemValue="false" />
                         </p:selectOneRadio>
                         
                         <p:outputLabel for="@next" value="Promoção: " />
-                        <p:selectBooleanCheckbox value="#{cadastroBean.produto.promocao}" />
+                        <p:selectBooleanCheckbox value="#{cadastroBean.promocao}" />
  
                     </p:panelGrid>
                     <p:toolbar>
@@ -52,6 +53,11 @@
                             <p:commandButton value="Cadastrar" action="#{cadastroBean.cadastrar()}" update="@form"/>
                         </p:toolbarGroup>
                     </p:toolbar>
+                    <p:dataTable value="#{cadastroBean.produtos}" var="prod">
+                        <p:column headerText="Nome">
+                            <h:outputText value="#{prod.nome}"/>
+                        </p:column>
+                    </p:dataTable>
                 </h:form>
             </p:layoutUnit>
         </ui:define>

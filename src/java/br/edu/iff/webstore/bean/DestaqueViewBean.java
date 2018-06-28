@@ -15,6 +15,14 @@ public class DestaqueViewBean {
     public void init() {
         produtos = produtosCadastrados.getProdutos();
     }
+
+    public CadastroBean getProdutosCadastrados() {
+        return produtosCadastrados;
+    }
+
+    public void setProdutosCadastrados(CadastroBean produtosCadastrados) {
+        this.produtosCadastrados = produtosCadastrados;
+    }
     
     public List<Produto> getProdutos() {
         return produtos;

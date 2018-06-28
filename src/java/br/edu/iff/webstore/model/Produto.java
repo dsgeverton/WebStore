@@ -5,17 +5,37 @@ public class Produto {
     private double preco;
     private String nome, descricao, tipo;
     private boolean habilitado, disponivel;
-
     private boolean destaque;
     private boolean promocao;
 
-        public boolean isDisponivel() {
-            return disponivel;
-        }
+    
+    public Produto(int id, int quantidade, double preco, String nome, String descricao, String tipo, boolean habilitado,
+                    boolean disponivel, boolean destaque, boolean promocao){
+        this.id = id;
+        this.quantidade = quantidade;
+        this.preco = preco;
+        this.nome = nome;
+        this.descricao = descricao;
+        this.tipo = tipo;
+        this.habilitado = habilitado;
+        this.disponivel = disponivel;
+        this.destaque = destaque;
+        this.promocao = promocao;               
+                
+    }
 
-        public void setDisponivel(boolean disponivel) {
-            this.disponivel = disponivel;
-        }
+    public Produto() {
+    }
+    
+    
+    
+    public boolean isDisponivel() {
+        return disponivel;
+    }
+
+    public void setDisponivel(boolean disponivel) {
+        this.disponivel = disponivel;
+    }
     public String getTipo() {
         return tipo;
     }

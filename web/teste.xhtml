@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form id="form">
+            <p:dataGrid var="produtoDestaque" value="#{cadastroBean.produtosDestaques}" columns="3" layout="grid"
+                        rows="3" id="dataGridProdutos">
+
+                        <f:facet name="header">
+                            Produtos em Destaque
+                        </f:facet>
+
+                <p:panel header="#{produtoDestaque.nome}" style="text-align:center">
+                            <h:panelGrid columns="1" style="width:100%">
+                                <p:graphicImage name="demo/images/car/t.gif"/> 
+                                
+                                <p:galleria style="margin: auto" value="#{produtoDestaque.images}" var="image"  panelWidth="300" panelHeight="200" >
+                                    <p:graphicImage width="300" name="/images/#{image}" alt="#{image}"/>
+                                </p:galleria>
+                                
+                                <h:outputText value="R$ #{produtoDestaque.valor}"/>
+
+                                <p:commandLink oncomplete="PF('carDialog').show()" title="View Detail">
+                                    <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />
+                                
+                                </p:commandLink>
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:dataGrid>
+                </h:form>
+    </h:body>
+</html>
+

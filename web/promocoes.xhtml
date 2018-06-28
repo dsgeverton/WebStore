@@ -3,13 +3,37 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="./Template/template.xhtml">
 
-    <ui:composition template="./Template/template.xhtml">
         <ui:define name="corpo">
-            <p:layoutUnit position="center">
-                PROMOÇÕES
-            </p:layoutUnit>
+
+            <h:form id="form">
+                <p:dataGrid var="produtoDestaque" value="#{cadastroBean.produtos}" columns="3" layout="grid"
+                            rows="3" id="dataGridProdutos" emptyMessage="Nenhum Produto Encontrado">
+
+                    <f:facet name="header">
+                        Produtos em Destaque
+                    </f:facet>
+
+                    <p:panel header="#{produtoDestaque.nome}" style="text-align:center">
+                        <h:panelGrid columns="1" style="width:100%">
+
+                            <p:galleria style="margin: auto" value="#{produtoDestaque.images}" var="image"  panelWidth="300" panelHeight="200" >
+                                <p:graphicImage width="300" name="/images/#{image}" alt="#{image}"/>
+                            </p:galleria>
+
+                            <h:outputText value="R$ #{produtoDestaque.valor}"/>
+
+                            <p:commandLink oncomplete="PF('carDialog').show()" title="View Detail">
+                                <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />
+
+                            </p:commandLink>
+                        </h:panelGrid>
+                    </p:panel>
+                </p:dataGrid>
+            </h:form>
         </ui:define>
     </ui:composition>
 </html>

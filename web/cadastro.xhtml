@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="./Template/template.xhtml">
+        <ui:define name="corpo">
+            <h:form id="formPrincipal">
+                <p:growl id="msgs" showDetail="true"/>
+
+                <p:dataTable id="cadastroProdutos" var="produto" 
+                             selection="#{cadastroBean.produtoSelecionado}"
+                             rowKey="#{produto.id}"
+                             value="#{cadastroBean.produtos}" editable="true" 
+                             style="margin-bottom:20px" emptyMessage="Nenhum Registro Encontrado">
+                    <f:facet name="header">
+                        Cadastro de Produtos
+                    </f:facet>
+
+                    <p:ajax event="rowEdit" listener="#{cadastroBean.onRowEdit}" update=":formPrincipal:msgs" />
+                    <p:ajax event="rowSelect"  update=":formPrincipal:cadastroProdutos"/>
+                    
+                    <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+                    <p:column headerText="Id">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{produto.id}" /></f:facet>
+                            <f:facet name="input"><p:inputText id="modelInput" value="#{produto.id}" style="width:100%"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="Nome">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{produto.nome}" /></f:facet>
+                            <f:facet name="input"><p:inputText value="#{produto.nome}" style="width:100%" label="Year"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="Valor">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{produto.valor}" /></f:facet>
+                            <f:facet name="input"><p:inputText value="#{produto.valor}" style="width:100%" /></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="Promoção">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{produto.promocao}" style="width:100%" />
+                            </f:facet>
+                            <f:facet name="input">
+                                <p:selectBooleanCheckbox value="#{cadastroBean.promocao}" required="true" requiredMessage="Obrigatório" id="promo" />
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="Destaque">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{produto.destaque}" style="width:100%"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <p:selectBooleanCheckbox value="#{cadastroBean.destaque}" required="true" requiredMessage="Obrigatório" id="destaque" />
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="Tipo">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{produto.tipo}" style="width:100%"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <p:selectOneMenu id="tipo" value="#{cadastroBean.tipo}" style="width:125px">
+                                    <f:selectItem itemLabel="Calçado" itemValue="calcado" />
+                                    <f:selectItem itemLabel="Calça" itemValue="calca" />
+                                    <f:selectItem itemLabel="Blusa" itemValue="blusa" />
+                                    <f:selectItem itemLabel="Vestido" itemValue="vestido" />
+                                </p:selectOneMenu>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column style="width:32px">
+                        <p:rowEditor />
+                    </p:column>
+
+                    <f:facet name="footer">
+                        <p:commandButton id="add" value="Adicionar"
+                                         onclick="PF('cadastro').show();" />
+                        <p:commandButton id="excluir" value="Excluir" disabled="#{!cadastroBean.itemSelecionado}"
+                                         onclick="PF('cadastro').show();" />
+                        <p:menu><p:menuitem outcome="teste" value="Página Teste"/></p:menu>
+                    </f:facet>
+                </p:dataTable>
+            </h:form> 
+            <p:dialog widgetVar="cadastro" modal="true"
+                      header="Cadastrar Produto">
+                <h:form >
+                    <p:panelGrid id="pnlCadastrar" columns="3">
+                        <p:outputLabel for="id" value="Id:"/>
+                        <p:inputMask mask="9999" required="true" requiredMessage="ID obrigatório" id="id" value="#{cadastroBean.id}"/>
+                        <p:message for="id" display="icon"/>
+
+                        <p:outputLabel for="nome" value="Nome:"/>
+                        <p:inputText required="true" requiredMessage="Nome obrigatório" id="nome" value="#{cadastroBean.nome}" />
+                        <p:message for="nome" display="icon"/>
+
+                        <p:outputLabel for="valor" value="Valor:"/>
+                        <p:inputNumber symbol="R$" symbolPosition="p" decimalSeparator="," emptyValue="" required="true" requiredMessage="Valor obrigatório" id="valor" value="#{cadastroBean.valor}"/>
+                        <p:message for="valor" display="icon"/>
+
+                        <p:outputLabel for="tipo" value="Tipo:"/>
+                        <p:selectOneMenu id="tipo" value="#{cadastroBean.tipo}" style="width:125px">
+                            <f:selectItem itemLabel="Calçado" itemValue="calcado" />
+                            <f:selectItem itemLabel="Calça" itemValue="calca" />
+                            <f:selectItem itemLabel="Blusa" itemValue="blusa" />
+                            <f:selectItem itemLabel="Vestido" itemValue="vestido" />
+                        </p:selectOneMenu>
+                        <p:message for="tipo" display="icon"/>
+
+                        <p:outputLabel for="promo" value="Promoção:"/>
+                        <p:selectBooleanCheckbox value="#{cadastroBean.promocao}" required="true" requiredMessage="Obrigatório" id="promo" />
+                        <p:message for="promo" display="icon"/>
+
+                        <p:outputLabel for="destaque" value="Destaque:"/>
+                        <p:selectBooleanCheckbox value="#{cadastroBean.destaque}" required="true" requiredMessage="Obrigatório" id="destaque" />
+                        <p:message for="destaque" display="icon"/>
+
+                        <p:commandButton value="Limpar"
+                                         action="#{cadastroBean.limpar()}"
+                                         update="pnlCadastrar"/>
+                        <p:commandButton value="Salvar"
+                                         action="#{cadastroBean.salvar()}"
+                                         update="pnlCadastrar :formPrincipal:cadastroProdutos"/>
+                    </p:panelGrid>    
+                </h:form>                
+            </p:dialog>
+             
+        </ui:define>
+    </ui:composition>
+</html>
+
