@@ -30,6 +30,14 @@
                             </p:galleria>
 
                             <h:outputText value="R$ #{produtoDestaque.valor}"/>
+                            <h:outputText rendered="#{produtoDestaque.promocao}" style="background-color: red;
+                                      color: white;
+                                      width: 30%;
+                                      margin: 0px;
+                                      margin-left: -19px;
+                                      font-size: 16pt;"
+                                      value="Promoção!">
+                            </h:outputText>
 
                             <p:commandLink oncomplete="PF('carDialog').show()" title="View Detail">
                                 <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />

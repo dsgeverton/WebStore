@@ -8,7 +8,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import model.Produto;
-import static org.primefaces.component.column.Column.PropertyKeys.filterValue;
 import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.RowEditEvent;
 

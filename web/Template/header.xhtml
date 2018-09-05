@@ -6,7 +6,7 @@
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition>
-<h:form id="formCabecalho">
+        <h:form id="formCabecalho">
             <p:panelGrid columns="2" id="painelCabecalho"
                          style="width: 100%">
 
@@ -14,7 +14,7 @@
                                 name="índice.jpeg"
                                 width="150px"
                                 style="width: 80%"/>
-                
+
                 <p:panel id="loginGeral">
                     <p:panelGrid columns="2" rendered="#{loginBean.logado == false}">                    
                         <p:outputLabel for="login" value="Login:"/>
@@ -23,7 +23,7 @@
                         <p:outputLabel for="senha" value="Senha:"/>
                         <p:password id="senha" value="#{loginBean.senha}"/>
 
-                        <p:commandButton value="Logar" action="#{loginBean.logar}" update="formCabecalho :formCabecalho:loginGeral"/>                    
+                        <p:commandButton value="Logar" action="#{loginBean.logar}" update="loginGeral"/>                    
                     </p:panelGrid>
 
                     <p:panelGrid columns="1" rendered="#{loginBean.logado == true}">
@@ -32,7 +32,7 @@
                     </p:panelGrid>
                 </p:panel>
             </p:panelGrid>
-        
+
         </h:form>
     </ui:composition>
 </html>
