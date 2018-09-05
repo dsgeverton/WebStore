@@ -1,4 +1,3 @@
-package br.edu.iff.webstore.bean;
 
 import java.io.IOException;
 import java.io.Serializable;

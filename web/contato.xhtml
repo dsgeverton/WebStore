@@ -2,34 +2,36 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
- 
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
     <ui:composition template="./Template/template.xhtml">
         <ui:define name="corpo">
-            <p:layoutUnit position="center">
-                 <h:form >
-                    <p:panelGrid columns="2">
-                        <p:outputLabel value="Nome:"/>
-                        <p:inputText id="nome" value="#{contatoBean.nome}"/>
+            <h:form >
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="Nome:"/>
+                    <p:inputText id="nome" value="#{contatoBean.nome}"/>
 
-                        <p:outputLabel value="Sobrenome"/>
-                        <p:inputText id="sobrenome" value="#{contatoBean.sobrenome}"/>
+                    <p:outputLabel value="Sobrenome"/>
+                    <p:inputText id="sobrenome" value="#{contatoBean.sobrenome}"/>
 
-                        <p:outputLabel value="Email:"/>
-                        <p:inputText id="email" value="#{contatoBean.email}"/>
+                    <p:outputLabel value="Email:"/>
+                    <p:inputText id="email" value="#{contatoBean.email}"/>
 
-                        <p:outputLabel value="Telefone:"/>
-                        <p:inputText id="telefone" value="#{contatoBean.telefone}"/>
+                    <p:outputLabel value="Telefone:"/>
+                    <p:inputText id="telefone" value="#{contatoBean.telefone}"/>
 
-                        <p:outputLabel value="Mensagem:"/>
-                        <p:inputTextarea rows="6" cols="33" id="mensagem" value="#{contatoBean.mensagem}"/>
+                    <p:outputLabel value="Mensagem:"/>
+                    <p:inputTextarea rows="6" cols="33" id="mensagem" value="#{contatoBean.mensagem}"/>
 
+                </p:panelGrid>
+                <p:toolbar>
+                    <p:toolbarGroup>
                         <p:commandButton value="Enviar" action="#{contatoBean.enviar()}">
-                                           </p:commandButton>
-                    </p:panelGrid>
-                </h:form>
-            </p:layoutUnit>
+                        </p:commandButton>      
+                    </p:toolbarGroup>
+                </p:toolbar>
+            </h:form>
         </ui:define>
     </ui:composition>
 </html>
+

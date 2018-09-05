@@ -18,10 +18,11 @@
                 <p:menuitem value="Promoções" outcome="promocoes" icon="ui-icon-star">
                     <f:param name="i" value="2" />
                 </p:menuitem>
-                <p:menuitem value="Contato" outcome="teste"  icon="fa fa-envelope">
+                <p:menuitem value="Contato" outcome="contato"  icon="fa fa-envelope">
                     <f:param name="i" value="3" />
                 </p:menuitem>
-                <p:menuitem value="Cadastrar" outcome="cadastro"  icon="ui-icon-pen">
+            
+                <p:menuitem rendered="#{loginBean.logado}" value="Cadastrar" outcome="cadastro"  icon="ui-icon-pen">
                     <f:param name="i" value="4" />
                 </p:menuitem>
             </p:tabMenu>

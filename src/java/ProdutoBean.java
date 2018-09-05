@@ -8,19 +8,20 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import model.Produto;
+import static org.primefaces.component.column.Column.PropertyKeys.filterValue;
 import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.RowEditEvent;
 
 @Named
 @SessionScoped
-public class CadastroBean implements Serializable {
+public class ProdutoBean implements Serializable {
 
-    private List<Produto> produtos, produtosDestaques;
+    private List<Produto> produtos, produtosDestaques, produtosFiltrados;
     private List<String> images;
     private List<Produto> produtoSelecionado;
     private int id;
     private float valor;
-    private String nome, tipo;
+    private String nome, tipo, pesquisa;
     private boolean promocao, destaque, itemSelecionado;
 
     @PostConstruct
@@ -59,6 +60,39 @@ public class CadastroBean implements Serializable {
         p.setImages(images);
         produtos.add(p);
         limpar();
+    }
+    
+    public void excluir(){
+        if(produtoSelecionado != null){
+            for(Produto p: produtoSelecionado){
+                produtos.remove(p);
+            }
+            if(produtoSelecionado.size() > 1)
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Exclusão de Produtos", "Produtos excluídos com sucesso!"));
+            else
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Exclusão de Produtos", "Produto excluído com sucesso!"));
+        }
+    }
+    
+    public void filterList() {
+        produtosFiltrados = new ArrayList<>();
+
+}
+
+    public String getPesquisa() {
+        return pesquisa;
+    }
+
+    public void setPesquisa(String pesquisa) {
+        this.pesquisa = pesquisa;
+    }
+
+    public List<Produto> getProdutosFiltrados() {
+        return produtosFiltrados;
+    }
+
+    public void setProdutosFiltrados(List<Produto> produtosFiltrados) {
+        this.produtosFiltrados = produtosFiltrados;
     }
 
     public List<Produto> getProdutoSelecionado() {
